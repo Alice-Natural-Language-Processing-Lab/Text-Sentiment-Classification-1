@@ -2,7 +2,10 @@ Text Sentiment Classification on twitter data set using classifiers such as SVM,
 
 Used python's nltk and svm library.
 
+Also implemented Naive Bayes with name Self_NB.py
+
 Achieved the accuracy of 78%.
+
 
 
 
