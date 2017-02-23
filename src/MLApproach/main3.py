@@ -11,17 +11,26 @@ import classifier2
 import svmclassifier
 import classifier_Self_NB
 
+from nltk.corpus import movie_reviews
+
 
 
 
 def Main():
-	fp = csv.reader(open('../../DataSet/Tweets_sample2.csv','rb'),delimiter=',',quotechar='"')
-	
-	#fp = open('../../Data_Set/kaggle.txt','rb')
-	
-	data_list = processing_data_set.data_list(fp)
+
+	negids = movie_reviews.fileids('neg')
+	posids = movie_reviews.fileids('pos')
+
+	negfeats = [[movie_reviews.raw(fileids=[f]),'neg'] for f in negids]
+	posfeats = [[movie_reviews.raw(fileids=[f]),'pos'] for f in posids]
+
+	#data_list = processing_data_set.data_list(fp)
+
+	data_list = negfeats + posfeats
 	
 	random.shuffle(data_list)
+
+	print len(data_list)
 	
 	feature_list = []
 	
@@ -60,7 +69,7 @@ def Main():
 	
 	#print dic
 			
-	feature_list =  sorted(dic , key = dic.__getitem__ , reverse = True)[:3000]
+	feature_list =  sorted(dic , key = dic.__getitem__ , reverse = True)[:]
 		
 	print "Length of feature list " , len(feature_list)
 	

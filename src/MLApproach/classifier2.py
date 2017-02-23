@@ -43,7 +43,7 @@ def NB_classifier(data_list,feature_list):
 	
 	feature_set = util.apply_features(extract_features,data_list)
 	
-	print feature_set[:2]
+	#print feature_set[:2]
 	
 	#random.shuffle(feature_set)
 	
@@ -54,7 +54,7 @@ def NB_classifier(data_list,feature_list):
 	#print length
 	
 	#No. of cross folds
-	CF = 4
+	CF = 10
 	i = 0
 	
 	testing_length = int(ceil(length/CF))
@@ -73,10 +73,10 @@ def NB_classifier(data_list,feature_list):
 		training_set1 = feature_set[0:start]
 		training_set2 = feature_set[end:]
 		training_set = training_set1 + training_set2
-		
+
 		NBClassifier = nltk.NaiveBayesClassifier.train(training_set)
 		acc.append((nltk.classify.accuracy(NBClassifier,testing_set))*100)
-		print("Accuracy predicted by Naive Bayes Algorithm on attempt : ",i+1, (nltk.classify.accuracy(NBClassifier,testing_set))*100)
+		print("Accuracy predicted by Naive Bayes Algorithm on attempt : ",i+1, acc[-1])
 		
 		'''
 		#Naive Bayes
@@ -115,6 +115,7 @@ def NB_classifier(data_list,feature_list):
 	
 	#print("Accuracy by Naive bayes on different folds : ",acc)
 	acc = sum(acc)/CF
+	print acc
 	#print("Overall accuracy by Naive bayes algo",acc)
 	'''
 	print("Accuracy by Multinomial Naive bayes on different folds : ",acc_mNB)
